@@ -7,8 +7,7 @@ button.addEventListener('click', e => {
     if(!recognition) return
     listening ? recognition.stop() : recognition.start()
     button.innerHTML =  listening ? 'Aperte para falar' : 'Parar de escutar'
-    button.innerHTML.toggle('TESTE') 
-    button.innerHTML.toggle('TESTE1') 
+   
 })
 
 
@@ -21,10 +20,11 @@ function createRecognition () {
         return null
     }
 recognition.lang = "pt_BR"
+recognition.continuous = true;
 recognition.onstart = () => listening = true
 recognition.onend = () => listening = false
 recognition.onerror = e => console.log('error',e)
-recognition.onresult = e => paragrafo.innerHTML = e.results[0][0].transcript
+recognition.onresult = e => paragrafo.innerHTML += e.results[0][0].transcript + "-"
 return recognition
 
 }
